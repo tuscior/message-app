@@ -1,6 +1,5 @@
 import { Router } from 'express'
-// @ts-ignore
-import { Request, Response, NextFunction } from "@types/express";
+import { Request, Response, NextFunction } from "express";
 import { messageBody } from '../../models/interfaces/message.interface'
 import { messageControllerInterface } from '../../app/interfaces/message.interface';
 
