@@ -2,9 +2,9 @@ import { messageBody, messageDTO, messageRemoveQuery } from '../../models/interf
 
 export interface messageControllerInterface {
     create: (message: messageBody) => Promise<messageDTO>,
-    getAll: (email: any) => Promise<Array<messageDTO>>,
+    getAll: (email) => Promise<Array<messageDTO>>,
     getAllAndRemove: (query: messageRemoveQuery) => Promise<Array<messageDTO>>
 }
 export interface createMessageControllerInterface {
-    (models:any):messageControllerInterface
+    (models):messageControllerInterface
 }

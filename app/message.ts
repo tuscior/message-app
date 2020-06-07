@@ -18,7 +18,7 @@ const getAllAndRemoveMessages = (messageModel) => async (query: messageRemoveQue
     return results;
 }
 
-export const createMessageController:createMessageControllerInterface = (message:any):messageControllerInterface => ({
+export const createMessageController:createMessageControllerInterface = (message):messageControllerInterface => ({
     create: createMessage(message),
     getAll: getAllMessages(message),
     getAllAndRemove: getAllAndRemoveMessages(message)

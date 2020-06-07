@@ -3,7 +3,7 @@ import { statusControllerInterface } from './status.interface';
 import { configInterface } from '../../config.interface';
 
 export interface createAppInterace {
-    (config: configInterface, models: any): {
+    (config: configInterface, models): {
         status: statusControllerInterface,
         message: messageControllerInterface
     }

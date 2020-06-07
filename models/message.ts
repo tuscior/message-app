@@ -26,7 +26,11 @@ const Message = new Schema(
 );
 
 Message.set('toJSON', {
-  virtuals: true,
+  transform: function (doc, ret, options) {
+    delete ret._id;
+    delete ret.__v;
+    delete ret.created_at;
+  }
 });
 
 // Message.options.toJSON.transform = (_, ret) => {
