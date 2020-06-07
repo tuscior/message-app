@@ -6,7 +6,6 @@ import { config } from './config';
 import mongoose from 'mongoose';
 
 const start = async () => {
-    // db.getCollection("COLLECTION_NAME").find({"createdAt":{$lt:new Date(Date.now() - 5*60 * 1000)}})
     const app = createApp(config, models);
     const { startServer } = createHttpApp(config, app);
     const stopDatabase = await startDatabase(config.DB_URL, mongoose);
@@ -16,6 +15,11 @@ const start = async () => {
         console.log('Closing ... ');
         await stopServer();
         stopDatabase();
+    }).on('unhandledRejection', (reason, p) => {
+      console.error(reason, 'Unhandled Rejection at Promise', p);
+    }).on('uncaughtException', err => {
+      console.error(err, 'Uncaught Exception thrown');
+      process.exit(1);
     });
 }
 start();

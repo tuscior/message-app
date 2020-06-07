@@ -1,16 +1,22 @@
 export const startDatabase = (URL: string, db) => {
-    db.connect(URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-    
-    db.connection.on('connected', function() {
-      console.log(`Mongoose connected to ${URL}`);
-    });
-    
-    db.connection.on('error', function(err) {
-      console.log(`Mongoose error: ${err}`);
-    });
+    const options = {
+      bufferMaxEntries: 0,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  
+    const connectWithRetry = () => {
+      console.log('MongoDB connection with retry')
+      db.connect(URL, options)
+        .then(()=>{
+        console.log('MongoDB is connected')
+      }).catch(err=>{
+        console.log('MongoDB connection unsuccessful, retry after 5 seconds.')
+        setTimeout(connectWithRetry, 5000)
+      })
+    }
+    connectWithRetry();
+
     return () =>
       db.connection
         .close()

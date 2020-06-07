@@ -2,15 +2,10 @@ version: '3.7'
 
 services:
 
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: "npm run test"
-
   node:
     build:
       context: .
+    image: tuscior/message-app:latest
     ports:
       - "8080:8080"
     networks:
@@ -23,8 +18,6 @@ services:
 
   mongodb:
     image: mongo
-    ports:
-      - "27017:27017"
     networks:
       - nodeapp-network
 
